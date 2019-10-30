@@ -136,6 +136,7 @@ function createArticle(content) {
   const pTwo = document.createElement('p');
   const pThree = document.createElement('p');
   const expandButton = document.createElement('span');
+  const closeButton = document.createElement('span');
 
   article.appendChild(title);
   article.appendChild(date);
@@ -143,10 +144,13 @@ function createArticle(content) {
   article.appendChild(pTwo);
   article.appendChild(pThree);
   article.appendChild(expandButton);
+  article.appendChild(closeButton);
+
 
   article.classList.add('article');
   date.classList.add('date');
-  expandButton.classList.add('expandButton');
+  expandButton.classList.add('expandCloseButton');
+  closeButton.classList.add('expandCloseButton', 'hideButton')
 
   title.textContent = content.title;
   date.textContent = content.date;
@@ -154,10 +158,20 @@ function createArticle(content) {
   pTwo.textContent = content.secondParagraph;
   pThree.textContent = content.thirdParagraph;
   expandButton.textContent = 'expand';
+  closeButton.textContent = 'close';
 
   expandButton.addEventListener('click', () => {
     article.classList.toggle('article-open');
+    expandButton.classList.toggle('hideButton');
+    closeButton.classList.toggle('hideButton');
   });
+
+  closeButton.addEventListener('click', () => {
+    article.classList.toggle('article-open');
+    closeButton.classList.toggle('hideButton');
+    expandButton.classList.toggle('hideButton');
+
+  })
 
   return article;
 }
