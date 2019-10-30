@@ -137,6 +137,7 @@ function createArticle(content) {
   const pThree = document.createElement('p');
   const expandButton = document.createElement('span');
   const closeButton = document.createElement('span');
+  const readButton = document.createElement('span');
 
   article.appendChild(title);
   article.appendChild(date);
@@ -145,12 +146,14 @@ function createArticle(content) {
   article.appendChild(pThree);
   article.appendChild(expandButton);
   article.appendChild(closeButton);
+  article.appendChild(readButton);
 
 
   article.classList.add('article');
   date.classList.add('date');
   expandButton.classList.add('expandCloseButton');
   closeButton.classList.add('expandCloseButton', 'hideButton')
+  readButton.classList.add('readButton');
 
   title.textContent = content.title;
   date.textContent = content.date;
@@ -159,6 +162,7 @@ function createArticle(content) {
   pThree.textContent = content.thirdParagraph;
   expandButton.textContent = 'expand';
   closeButton.textContent = 'close';
+  readButton.textContent = 'Mark as read';
 
   expandButton.addEventListener('click', () => {
     article.classList.toggle('article-open');
@@ -171,6 +175,13 @@ function createArticle(content) {
     closeButton.classList.toggle('hideButton');
     expandButton.classList.toggle('hideButton');
 
+  });
+
+  readButton.addEventListener('click', () => {
+    const choice = confirm('You \'bout to make this article go bye-bye for all time. You cool with that?');
+    if ( choice === true ) {
+      article.style.display = 'none';
+    }
   })
 
   return article;
